@@ -2,7 +2,7 @@ package andrehsvictor.parrot.application.dto;
 
 import java.time.LocalDateTime;
 
-public record PostResponse(Long id, String title, String content, PostAuthorDetails author, LocalDateTime createdAt) {
+public record PostResponse(Long id, String title, String content, AuthorDetails author, LocalDateTime createdAt) {
 
     public static PostResponseBuilder builder() {
         return new PostResponseBuilder();
@@ -12,7 +12,7 @@ public record PostResponse(Long id, String title, String content, PostAuthorDeta
         private Long id;
         private String title;
         private String content;
-        private PostAuthorDetails author;
+        private AuthorDetails author;
         private LocalDateTime createdAt;
 
         PostResponseBuilder() {
@@ -33,7 +33,7 @@ public record PostResponse(Long id, String title, String content, PostAuthorDeta
             return this;
         }
 
-        public PostResponseBuilder author(PostAuthorDetails author) {
+        public PostResponseBuilder author(AuthorDetails author) {
             this.author = author;
             return this;
         }
