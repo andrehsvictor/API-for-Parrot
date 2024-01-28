@@ -2,7 +2,7 @@ package andrehsvictor.parrot.application.dto;
 
 import java.time.LocalDateTime;
 
-public record TokenResponse(Long userId, LocalDateTime createdAt, LocalDateTime expiresAt, String accessToken,
+public record TokenResponse(Long userId, String createdAt, String expiresAt, String accessToken,
         String refreshToken) {
     public static TokenResponseBuilder builder() {
         return new TokenResponseBuilder();
@@ -10,8 +10,8 @@ public record TokenResponse(Long userId, LocalDateTime createdAt, LocalDateTime 
 
     public static class TokenResponseBuilder {
         private Long userId;
-        private LocalDateTime createdAt;
-        private LocalDateTime expiresAt;
+        private String createdAt;
+        private String expiresAt;
         private String accessToken;
         private String refreshToken;
 
@@ -24,12 +24,12 @@ public record TokenResponse(Long userId, LocalDateTime createdAt, LocalDateTime 
         }
 
         public TokenResponseBuilder createdAt(LocalDateTime createdAt) {
-            this.createdAt = createdAt;
+            this.createdAt = createdAt.toString();
             return this;
         }
 
         public TokenResponseBuilder expiresAt(LocalDateTime expiresAt) {
-            this.expiresAt = expiresAt;
+            this.expiresAt = expiresAt.toString();
             return this;
         }
 
@@ -53,4 +53,5 @@ public record TokenResponse(Long userId, LocalDateTime createdAt, LocalDateTime 
                     + this.refreshToken + ")";
         }
     }
+
 }
