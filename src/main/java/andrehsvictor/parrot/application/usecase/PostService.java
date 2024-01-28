@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import andrehsvictor.parrot.application.dto.AuthorDetails;
+import andrehsvictor.parrot.application.dto.PostCommentDetails;
 import andrehsvictor.parrot.application.gateway.AuthenticatedUserProvider;
 import andrehsvictor.parrot.application.gateway.PostGateway;
+import andrehsvictor.parrot.domain.comment.Comment;
 import andrehsvictor.parrot.domain.post.Post;
 import andrehsvictor.parrot.domain.post.PostFactory;
 import andrehsvictor.parrot.domain.user.User;
@@ -38,20 +40,29 @@ public class PostService {
                 .title(createdPost.getTitle())
                 .content(createdPost.getContent())
                 .author(author)
-                .createdAt(createdPost.getCreatedAt())
+                .createdAt(createdPost.getCreatedAt().toString())
                 .build();
     }
 
     public PostResponse getPost(Long id) {
         Post post = postGateway.findById(id);
+        if (post == null)
+            return null;
         AuthorDetails author = new AuthorDetails(post.getAuthor().getId(),
                 post.getAuthor().getName());
+        Collection<PostCommentDetails> comments = new ArrayList<>();
+        for (Comment comment : post.getComments()) {
+            AuthorDetails commentAuthor = new AuthorDetails(comment.getAuthor().getId(),
+                    comment.getAuthor().getName());
+            comments.add(new PostCommentDetails(comment.getId(), comment.getContent(), commentAuthor));
+        }
         return PostResponse.builder()
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .author(author)
-                .createdAt(post.getCreatedAt())
+                .createdAt(post.getCreatedAt().toString())
+                .comments(comments)
                 .build();
     }
 
@@ -74,7 +85,7 @@ public class PostService {
                 .title(updatedPost.getTitle())
                 .content(updatedPost.getContent())
                 .author(author)
-                .createdAt(updatedPost.getCreatedAt())
+                .createdAt(updatedPost.getCreatedAt().toString())
                 .build();
     }
 
@@ -91,6 +102,12 @@ public class PostService {
         Collection<Post> posts = postGateway.findAllOrderByCreatedAtDesc();
         Collection<PostResponse> postResponses = new ArrayList<>();
         for (Post post : posts) {
+            Collection<PostCommentDetails> comments = new ArrayList<>();
+            for (Comment comment : post.getComments()) {
+                AuthorDetails commentAuthor = new AuthorDetails(comment.getAuthor().getId(),
+                        comment.getAuthor().getName());
+                comments.add(new PostCommentDetails(comment.getId(), comment.getContent(), commentAuthor));
+            }
             AuthorDetails author = new AuthorDetails(post.getAuthor().getId(),
                     post.getAuthor().getName());
             postResponses.add(PostResponse.builder()
@@ -98,7 +115,8 @@ public class PostService {
                     .title(post.getTitle())
                     .content(post.getContent())
                     .author(author)
-                    .createdAt(post.getCreatedAt())
+                    .createdAt(post.getCreatedAt().toString())
+                    .comments(comments)
                     .build());
         }
         return postResponses;
