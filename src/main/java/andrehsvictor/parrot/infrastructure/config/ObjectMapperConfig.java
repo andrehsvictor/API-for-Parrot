@@ -9,8 +9,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 @Configuration
 public class ObjectMapperConfig {
     @Bean
-    ObjectMapper objectMapper(ObjectMapper objectMapper) {
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-        return objectMapper;
+    ObjectMapper objectMapper() {
+        return new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
     }
 }
