@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import andrehsvictor.parrot.application.gateway.AuthenticatedUserProvider;
 import andrehsvictor.parrot.application.gateway.PostGateway;
-import andrehsvictor.parrot.application.use_case.PostService;
+import andrehsvictor.parrot.application.usecase.PostService;
 import andrehsvictor.parrot.infrastructure.persistence.post.PostGatewayImpl;
 import andrehsvictor.parrot.infrastructure.util.AuthenticatedUserProviderImpl;
 
