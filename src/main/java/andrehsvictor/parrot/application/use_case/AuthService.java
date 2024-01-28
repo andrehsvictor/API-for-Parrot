@@ -7,4 +7,5 @@ import andrehsvictor.parrot.application.dto.TokenResponse;
 public interface AuthService {
     TokenResponse signin(SigninRequest signinRequest);
     TokenResponse signup(SignupRequest signupRequest);
+    TokenResponse refresh(String refreshToken);
 }
