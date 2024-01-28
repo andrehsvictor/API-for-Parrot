@@ -1,5 +1,6 @@
 services:
   postgres:
+    container_name: parrot-dev-postgres
     image: postgres
     restart: always
     environment:
