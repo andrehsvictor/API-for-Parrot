@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import andrehsvictor.parrot.application.dto.SigninRequest;
 import andrehsvictor.parrot.application.dto.SignupRequest;
-import andrehsvictor.parrot.application.use_case.AuthService;
+import andrehsvictor.parrot.application.usecase.AuthService;
 
 @RestController
 @RequestMapping("/api/1.0/auth")
