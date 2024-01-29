@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      TZ: America/Sao_Paulo
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - parrot-network
+  app:
+    image: andrehsvictor/api-for-parrot
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      TZ: America/Sao_Paulo
+      spring.datasource.url: jdbc:postgresql://postgres:5432/postgres
+      spring.datasource.username: postgres
+      spring.datasource.password: postgres
+    depends_on:
+      - postgres
+    networks:
+      - parrot-network
+networks:
+  parrot-network:
+    name: parrot-network
