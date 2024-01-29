@@ -7,6 +7,7 @@ import andrehsvictor.parrot.application.gateway.AuthenticatedUserProvider;
 import andrehsvictor.parrot.application.gateway.PostGateway;
 import andrehsvictor.parrot.application.usecase.post.CreatePostUseCase;
 import andrehsvictor.parrot.application.usecase.post.DeletePostUseCase;
+import andrehsvictor.parrot.application.usecase.post.FindAllPostsUseCase;
 import andrehsvictor.parrot.application.usecase.post.FindPostUseCase;
 import andrehsvictor.parrot.application.usecase.post.UpdatePostUseCase;
 import andrehsvictor.parrot.infrastructure.persistence.post.PostGatewayImpl;
@@ -32,6 +33,11 @@ public class PostConfig {
     @Bean
     UpdatePostUseCase updatePostUseCase(AuthenticatedUserProvider authenticatedUserProvider) {
         return new UpdatePostUseCase(postGateway(), authenticatedUserProvider);
+    }
+
+    @Bean
+    FindAllPostsUseCase findAllPostsUseCase() {
+        return new FindAllPostsUseCase(postGateway());
     }
 
     @Bean
