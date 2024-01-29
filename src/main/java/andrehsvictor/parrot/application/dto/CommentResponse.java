@@ -2,7 +2,7 @@ package andrehsvictor.parrot.application.dto;
 
 import java.time.LocalDateTime;
 
-public record CommentResponse(Long id, String content, LocalDateTime createdAt, AuthorDetails author, CommentPostDetails post) {
+public record CommentResponse(Long id, String content, String createdAt, AuthorDetails author, CommentPostDetails post) {
 
     public static CommentResponseBuilder builder() {
         return new CommentResponseBuilder();
@@ -11,7 +11,7 @@ public record CommentResponse(Long id, String content, LocalDateTime createdAt, 
     public static class CommentResponseBuilder {
         private Long id;
         private String content;
-        private LocalDateTime createdAt;
+        private String createdAt;
         private AuthorDetails author;
         private CommentPostDetails post;
 
@@ -28,7 +28,7 @@ public record CommentResponse(Long id, String content, LocalDateTime createdAt, 
             return this;
         }
 
-        public CommentResponseBuilder createdAt(LocalDateTime createdAt) {
+        public CommentResponseBuilder createdAt(String createdAt) {
             this.createdAt = createdAt;
             return this;
         }
@@ -48,7 +48,9 @@ public record CommentResponse(Long id, String content, LocalDateTime createdAt, 
         }
 
         public String toString() {
-            return "CommentResponse.CommentResponseBuilder(id=" + this.id + ", content=" + this.content + ", createdAt=" + this.createdAt + ", author=" + this.author + ", post=" + this.post + ")";
+            return "CommentResponse.CommentResponseBuilder(id=" + this.id + ", content=" + this.content + ", createdAt="
+                    + this.createdAt + ", author=" + this.author + ", post=" + this.post + ")";
         }
     }
+
 }
