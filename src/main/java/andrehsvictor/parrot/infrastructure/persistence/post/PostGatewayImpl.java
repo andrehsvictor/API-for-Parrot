@@ -33,6 +33,9 @@ public class PostGatewayImpl implements PostGateway {
     @Override
     public Post findById(Long id) {
         PostEntity postEntity = entityManager.find(PostEntity.class, id);
+        if(postEntity == null) {
+            return null;
+        }
         return PostMapper.toDomain(postEntity);
     }
 
@@ -46,7 +49,7 @@ public class PostGatewayImpl implements PostGateway {
 
     @Override
     public Collection<Post> findAllOrderByCreatedAtDesc() {
-        Query query = entityManager.createQuery("SELECT p FROM PostEntity p ORDER BY p.createdAt DESC");
+        Query query = entityManager.createQuery("SELECT p FROM Post p ORDER BY p.createdAt DESC");
         Collection<PostEntity> postEntities = query.getResultList();
         Collection<Post> posts = new ArrayList<>();
         for (PostEntity postEntity : postEntities) {
