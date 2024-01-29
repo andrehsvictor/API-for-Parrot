@@ -10,7 +10,7 @@ services:
     networks:
       - parrot-network
   app:
-    image: andrehsvictor/api-for-parrot
+    image: andrehsvictor/parrot-backend
     restart: always
     ports:
       - 8080:8080
