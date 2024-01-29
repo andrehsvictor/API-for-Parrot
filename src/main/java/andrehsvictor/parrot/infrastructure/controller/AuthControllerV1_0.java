@@ -14,7 +14,7 @@ import andrehsvictor.parrot.application.dto.SignupRequest;
 import andrehsvictor.parrot.application.usecase.AuthService;
 
 @RestController
-@RequestMapping("/api/1.0/auth")
+@RequestMapping("/api/v1.0/auth")
 public class AuthControllerV1_0 {
     @Autowired
     private AuthService authService;
