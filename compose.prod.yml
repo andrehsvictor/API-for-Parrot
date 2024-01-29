@@ -11,7 +11,7 @@ services:
     networks:
       - parrot-network
   app:
-    image: andrehsvictor/parrot/backend
+    image: andrehsvictor/parrot-backend
     container_name: parrot-backend
     restart: always
     ports:
