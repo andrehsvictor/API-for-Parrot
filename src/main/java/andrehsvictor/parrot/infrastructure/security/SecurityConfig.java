@@ -22,12 +22,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers(HttpMethod.POST, "/api/1.0/auth/signin", "/api/1.0//auth/signup",
-                                        "/api/1.0/auth/refresh")
+                                .requestMatchers(HttpMethod.POST, "/api/v1.0/auth/signin", "/api/v1.0/auth/signup",
+                                        "/api/v1.0/auth/refresh")
                                 .permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/1.0/posts", "/api/1.0/posts/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/1.0/users", "/api/1.0/users/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/1.0/comments", "/api/1.0/comments/**")
+                                .requestMatchers(HttpMethod.GET, "/api/v1.0/posts", "/api/v1.0/posts/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1.0/users", "/api/v1.0/users/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1.0/comments", "/api/v1.0/comments/**")
                                 .permitAll()
                                 .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                                 .anyRequest().authenticated())
