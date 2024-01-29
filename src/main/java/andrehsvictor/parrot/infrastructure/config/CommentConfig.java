@@ -9,13 +9,12 @@ import andrehsvictor.parrot.application.usecase.comment.CreateCommentUseCase;
 import andrehsvictor.parrot.application.usecase.comment.DeleteCommentUseCase;
 import andrehsvictor.parrot.application.usecase.comment.FindCommentUseCase;
 import andrehsvictor.parrot.infrastructure.persistence.comment.CommentGatewayImpl;
-import andrehsvictor.parrot.infrastructure.util.AuthenticatedUserProviderImpl;
 
 @Configuration
 public class CommentConfig {
     @Bean
-    CreateCommentUseCase createCommentUseCase() {
-        return new CreateCommentUseCase(commentGateway(), authenticatedUserProvider());
+    CreateCommentUseCase createCommentUseCase(AuthenticatedUserProvider authenticatedUserProvider) {
+        return new CreateCommentUseCase(commentGateway(), authenticatedUserProvider);
     }
 
     @Bean
@@ -24,18 +23,13 @@ public class CommentConfig {
     }
 
     @Bean
-    AuthenticatedUserProvider authenticatedUserProvider() {
-        return new AuthenticatedUserProviderImpl();
-    }
-
-    @Bean
     FindCommentUseCase findCommentUseCase() {
         return new FindCommentUseCase(commentGateway());
     }
 
     @Bean
-    DeleteCommentUseCase deleteCommentUseCase() {
-        return new DeleteCommentUseCase(commentGateway(), authenticatedUserProvider());
+    DeleteCommentUseCase deleteCommentUseCase(AuthenticatedUserProvider authenticatedUserProvider) {
+        return new DeleteCommentUseCase(commentGateway(), authenticatedUserProvider);
     }
 
     // @Bean
